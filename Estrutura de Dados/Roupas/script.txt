@@ -1,0 +1,196 @@
+CREATE TABLE PRODUTOS ( 
+  ID                 INT(10) NOT NULL AUTO_INCREMENT,
+  REFERENCIA         VARCHAR(20),
+  DESCRICAO          VARCHAR(150),
+CONSTRAINT PK_TABLE1_1 PRIMARY KEY (ID)
+) 
+;
+
+CREATE TABLE GRADE ( 
+  ID              INT(10) NOT NULL AUTO_INCREMENT,
+  IDPROD          INT(10),
+  TAMANHO         INT(10),
+  PADRAO          INT(10),
+  COR1            INT(10),
+  COR2            INT(10),
+  COR3            INT(10),
+  FOTO            VARCHAR(500),
+CONSTRAINT PK_TABLE1_1 PRIMARY KEY (ID)
+) 
+;
+
+CREATE TABLE TABPRECO ( 
+  ID                INT(10) NOT NULL AUTO_INCREMENT,
+  DESCRICAO         VARCHAR(150),
+  DTINICIO          DATETIME(2),
+  DTFINAL           DATETIME(2),
+CONSTRAINT PK_TABLE1_1 PRIMARY KEY (ID)
+) 
+;
+
+CREATE TABLE PRECOS ( 
+  ID                    INT(10) NOT NULL AUTO_INCREMENT,
+  IDTBAPRC              INT(10),
+  IDGRADE               INT(10),
+  PRECOMEDIO            NUMERIC(12,2),
+  PRECOVENDA            NUMERIC(12,2),
+  RENTABILIDADE         NUMERIC(10,2),
+CONSTRAINT PK_TABLE1_1 PRIMARY KEY (ID)
+) 
+;
+
+CREATE TABLE `parceiros` (
+  `ID` int(10) NOT NULL AUTO_INCREMENT,
+  `NOME` varchar(150) DEFAULT NULL,
+  `ENDERECO` varchar(150) DEFAULT NULL,
+  `BAIRRO` varchar(60) DEFAULT NULL,
+  `NUMERO` int(9) DEFAULT NULL,
+  `COMPLEMENTO` varchar(60) DEFAULT NULL,
+  `CIDADE` varchar(100) DEFAULT NULL,
+  `ESTADO` varchar(2) DEFAULT NULL,
+  `CNPJ_CPF` varchar(20) DEFAULT NULL,
+  `CELULAR` varchar(20) DEFAULT NULL,
+  `FACEBOOK` varchar(300) DEFAULT NULL,
+  `INSTAGRAM` varchar(300) DEFAULT NULL,
+  `SITE` varchar(300) DEFAULT NULL,
+  `IDCARGO` int(40) DEFAULT NULL,
+  `IDTIPO` int(10) DEFAULT NULL,
+  `USUARIO` varchar(30) DEFAULT NULL,
+  `SENHA` varchar(50) DEFAULT NULL,
+  `CEP` varchar(8) DEFAULT NULL,
+  `EMAIL` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE PEDIDO ( 
+  ID                 INT(10) NOT NULL AUTO_INCREMENT,
+  TIPOPEDIDO         VARCHAR(1),
+  IDPARCEIRO         INT(10),
+  DATAPEDIDO         DATETIME(2),
+  DATAFATURA         DATETIME(2),
+  NRFATURA           INT(10),
+  USUARIOPED         INT(10),
+  USUARIOFAT         INT(10),
+CONSTRAINT PK_TABLE1_1 PRIMARY KEY (ID)
+) 
+;      
+
+CREATE TABLE ITEMPED ( 
+  ID                 INT(10) NOT NULL AUTO_INCREMENT,
+  IDPEDIDO           INT(10),
+  IDGRADE            INT(10),
+  IDPRECO            INT(10),
+  PRECOVENDA         NUMERIC(12,2),
+  DESCONTO           NUMERIC(10,2),
+  PRECOFINAL         NUMERIC(12,2),
+  QUANTIDADE         INT(10),
+CONSTRAINT PK_TABLE1_1 PRIMARY KEY (ID)
+) 
+;                                    
+
+CREATE TABLE MOVIMENTO ( 
+  ID                 INT(10) NOT NULL AUTO_INCREMENT,
+  NRFATURA           INT(10),
+  DATAMOV            DATETIME(2),
+  TIPOMOV            VARCHAR(1),
+  IDGRADE            INT(10),
+  QUANTIDADE         INT(10),
+  PRECOFINAL         NUMERIC(12,2),
+  IDPARCEIRO         INT(10),
+CONSTRAINT PK_TABLE1_1 PRIMARY KEY (ID)
+) 
+;
+
+CREATE TABLE `faturas` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `NRDOCUMENTO` int DEFAULT NULL,
+  `PARCELA` int DEFAULT NULL,
+  `DATAVENC` datetime(2) DEFAULT NULL,
+  `DATAPAGTO` datetime(2) DEFAULT NULL,
+  `VALORPARC` decimal(12,2) DEFAULT NULL,
+  `DESCONTO` decimal(12,2) DEFAULT NULL,
+  `ACRESCIMO` decimal(12,2) DEFAULT NULL,
+  `VALORPAGO` decimal(12,2) DEFAULT NULL,
+  `IDPARCEIRO` int NOT NULL,
+  `DESPREC` int NOT NULL,
+  `DESCRICAO` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `faturas_IDPARCEIRO_IDX` (`IDPARCEIRO`,`NRDOCUMENTO`,`PARCELA`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- A partir de 15/11
+
+CREATE TABLE loja.cabopcoes (
+	id BIGINT auto_increment NOT NULL,
+	titulo varchar(30) NULL,
+	descricao varchar(100) NULL,
+	CONSTRAINT cabopcoes_pk PRIMARY KEY (id)
+)
+CREATE TABLE opcoes (
+  id bigint(20) NOT NULL AUTO_INCREMENT,
+  idcabopcoes bigint(20) NOT NULL,
+  descricao varchar(100) NOT NULL,
+  ordem bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+
+
+INSERT INTO loja.opcoes
+(id, idcabopcoes, descricao, ordem)
+VALUES(30, 4, 'PROPRIETARIA', 1);
+INSERT INTO loja.opcoes
+(id, idcabopcoes, descricao, ordem)
+VALUES(31, 4, 'ADMINISTRADOR', 2);
+INSERT INTO loja.opcoes
+(id, idcabopcoes, descricao, ordem)
+VALUES(32, 4, 'VENDEDOR', 3);
+INSERT INTO loja.opcoes
+(id, idcabopcoes, descricao, ordem)
+VALUES(33, 4, 'AJUDANTE', 4);
+INSERT INTO loja.opcoes
+(id, idcabopcoes, descricao, ordem)
+VALUES(34, 5, 'CLIENTE', 1);
+INSERT INTO loja.opcoes
+(id, idcabopcoes, descricao, ordem)
+VALUES(35, 5, 'FORNECEDOR', 2);
+INSERT INTO loja.opcoes
+(id, idcabopcoes, descricao, ordem)
+VALUES(36, 5, 'FUNCIONÁRIO', 3);
+INSERT INTO loja.opcoes
+(id, idcabopcoes, descricao, ordem)
+VALUES(37, 5, 'VENDEDOR', 5);
+INSERT INTO loja.opcoes
+(id, idcabopcoes, descricao, ordem)
+VALUES(38, 5, 'TRANSPORTADORA', 4);
+INSERT INTO loja.opcoes
+(id, idcabopcoes, descricao, ordem)
+VALUES(39, 4, 'PARCEIRO', 5);
+
+
+INSERT INTO loja.cabopcoes
+(id, titulo, descricao)
+VALUES(4, 'CARGO', 'DEFINE CARGO DOS PARCEIROS');
+INSERT INTO loja.cabopcoes
+(id, titulo, descricao)
+VALUES(5, 'TIPOPARC', 'DEFINE TIPOS DE PARCEIROS (CLIENTE,FORN,FUNC,ETC)');
+
+
+insert into opcoes (idcabopcoes,descricao,ordem,SIGLA) values (6,'ENTRADA',1,'E');
+insert into opcoes (idcabopcoes,descricao,ordem,SIGLA) values (6,'SAIDA',2,'S');
+insert into opcoes (idcabopcoes,descricao,ordem,SIGLA) values (6,'BAIXA',3,'B');
+insert into opcoes (idcabopcoes,descricao,ordem,SIGLA) values (6,'GANHO',4,'G');
+insert into opcoes (idcabopcoes,descricao,ordem,SIGLA) values (6,'CANCELADO',5,'C');
+insert into opcoes (idcabopcoes,descricao,ordem,SIGLA) values (6,'DEV. CLIENTE',6,'D');
+insert into opcoes (idcabopcoes,descricao,ordem,SIGLA) values (6,'DEV. FORNECEDOR',7,'F');
+
+insert into opcoes (idcabopcoes,descricao,ordem) values (2,'CANELADO',5);
+
+alter table opcoes add column sigla varchar(3);
+alter table cabopcoes add column visualizacad bool not null;
+alter table precos change idtbaprc idtabprc int;
+
+                       
+
+
+
+              

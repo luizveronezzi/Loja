@@ -1,0 +1,161 @@
+﻿@model List<Data.Models.MovimentoModel>
+
+
+<form method="post" asp-action="Fluxo_Caixa">
+    <div id="MovFin">
+        <input class="inputlabel" name="mesAtual" id="mesAtual" hidden />
+        <h3>Movimento Finaneceiro</h3>
+        <hr />
+        <button type="button" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Adicionar</button>
+        <button class="btn btn-success btn-sm" type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+            <i class="far fa-calendar-alt"></i> @ViewBag.MesAtual
+        </button>
+        <div class="dropdown-menu px-3" style="box-shadow: 5px 5px 15px grey;" aria-labelledby="dropdownMenuClickableInside">
+            <div class="row">
+                <div class="col-4 d-flex justify-content-end align-items-center">
+                    <a onclick="AlteraAno(-1)" class="btn btn-success btn-sm" href="#"><i class="fas fa-angle-left"></i></a>
+                </div>
+                <div class="col-4 d-flex justify-content-center align-items-center">
+                    <input class="inputlabel" value=@ViewBag.MesAtual.Substring(3) id="AnoAtivo" />
+                </div>
+                <div class="col-4 d-flex justify-content-start align-items-center">
+                    <a onclick="AlteraAno(1)" class="btn btn-success btn-sm" href="#"><i class="fas fa-angle-right"></i></a>
+                </div>
+                <hr />
+            </div>
+           
+            <div class="row py-1">
+                    <div class="col-4">
+                        <button type="submit" onclick="CarregaMes('01')" class="btn btn-success btn-sm" style="width:100%">Janeiro</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" onclick="CarregaMes('02')" class="btn btn-success btn-sm" style="width:100%">Fevereiro</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" onclick="CarregaMes('03')" class="btn btn-success btn-sm" style="width:100%">Março</button>
+                    </div>
+                </div>
+                <div class="row py-1">
+                    <div class="col-4">
+                        <button type="submit" onclick="CarregaMes('04')" class="btn btn-success btn-sm" style="width:100%">Abril</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" onclick="CarregaMes('05')" class="btn btn-success btn-sm" style="width:100%">Maio</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" onclick="CarregaMes('06')" class="btn btn-success btn-sm" style="width:100%">Junho</button>
+                    </div>
+                </div>
+                <div class="row py-1">
+                    <div class="col-4">
+                        <button type="submit" onclick="CarregaMes('07')" class="btn btn-success btn-sm" style="width:100%">Julho</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" onclick="CarregaMes('08')" class="btn btn-success btn-sm" style="width:100%">Agosto</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" onclick="CarregaMes('09')" class="btn btn-success btn-sm" style="width:100%">Setembro</button>
+                    </div>
+                </div>
+                <div class="row py-1">
+                    <div class="col-4">
+                        <button type="submit" onclick="CarregaMes('10')" class="btn btn-success btn-sm" style="width:100%">Outubro</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" onclick="CarregaMes('11')" class="btn btn-success btn-sm" style="width:100%">Novembro</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" onclick="CarregaMes('12')" class="btn btn-success btn-sm" style="width:100%">Dezembro</button>
+                    </div>
+                </div>
+        </div>
+
+
+        <div class="col-6 shape p-3">
+            <table id="tableParceiro" class="table table-hover table-striped table-sm">
+                <thead class="table-light">
+                    <tr>
+                        <th>Vencimento</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Saldo</th>
+                        <th> </th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        string ccolorsal = (item.D_C == "S" ? "green" : item.Saldo < 0 ? "red" : "blue");
+                        string ccolorval = (item.D_C == "S" ? "green" : item.D_C == "D" ? "red" : "blue");
+
+                        <tr>
+                            <td>@item.Datavenc.ToString("dd/MM/yyyy")</td>
+                            <td>@item.Descricao</td>
+                            <td style="color: @ccolorval; text-align:right;">@item.Valorparc.ToString("N")</td>
+                            <td style="color: @ccolorsal; text-align:right;">@item.Saldo.ToString("N")</td>
+                            <td class="px-4">
+
+                                @if (item.D_C != "S")
+                                {
+                                    if (item.Datapagto == null && DateTime.Now < item.Datavenc)
+                                    {
+                                        <buttom data-bs-toggle="tooltip" title="A Vencer"><i class="fas fa-circle" style="color: orange;"></i></buttom>
+                                        <buttom data-bs-toggle="tooltip" title="Efetuar Pagamento"><i class="fas fa-check" style="color:lightgray;"></i></buttom>
+                                    }
+                                    else if (item.Datapagto == null && DateTime.Now >= item.Datavenc)
+                                    {
+                                        <buttom data-bs-toggle="tooltip" title="Vencido"><i class="fas fa-circle" style="color: red;"></i></buttom>
+                                        <buttom data-bs-toggle="tooltip" title="Efetuar Pagamento"><i class="fas fa-check" style="color:lightgray;"></i></buttom>
+                                    }
+                                    else
+                                    {
+                                        <buttom data-bs-toggle="tooltip" title="Quitado"><i class="fas fa-circle" style="color:green;"></i></buttom>
+                                        <buttom data-bs-toggle="tooltip" title="Já Conciliado"><i class="fas fa-check" style="color:green;"></i></buttom>
+                                    }
+
+                                    <buttom onclick="ConsultaFinanceiro(@item.Id)" data-bs-toggle="modal" data-bs-target="#myModal" data-tt="tooltip" title="Editar"><i class="far fa-edit" style="color:dodgerblue;"></i></buttom>
+                                    <buttom id="btnExcluir" data-bs-toggle="tooltip" title="Excluir"><i class="far fa-times-circle" style="color:red;"></i></buttom>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        
+    </div>
+
+    <div id="CadastroFinanceiro">
+        <!-- The Modal -->
+        <div class="modal" id="myModal" data-bs-backdrop="static">
+            <div class="modal-dialog  modal-lg modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Ficha Financeira</h4>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div id="bodymodal"></div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button id="btnSalvar" type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Salvar</button>
+                        <button id="btnCancelar" type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="~/js/MovimentoFinanceiro.js"></script>
+

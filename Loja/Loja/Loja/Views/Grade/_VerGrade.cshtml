@@ -1,0 +1,83 @@
+﻿@model Data.Models.GradeModel
+
+
+<div class="form-group shape col-12 col-sm-12">
+    <input class="hidden" asp-for="Id" />
+    <input class="hidden" asp-for="IdProd" />
+    <div class="row">
+        <div class="mb-2 col-12 col-sm-2">
+            <label class="form-label mb-1" asp-for="GradeDetalhe.Referencia"></label>
+            <input class="form-control form-control-sm" asp-for="GradeDetalhe.Referencia" id="Referencia" onblur="TrasProduto()" type="text" list="listaprodutos"  placeholder="Entre Com a Referência" />
+            <span class="text-danger" asp-validation-for="GradeDetalhe.Referencia"></span>
+            <datalist id="listaprodutos">
+                @foreach (var item in Model.ListaProduto)
+                {
+                    <option value=@item.Referencia>@item.Descricao</option>
+                }
+            </datalist>
+        </div>
+        <div class="mb-2 col-12 col-sm-10">
+            <label class="form-label mb-1" asp-for="GradeDetalhe.Descricao"></label>
+            <input class="form-control form-control-sm" asp-for="GradeDetalhe.Descricao" id="Descricao" disabled />
+            <span class="text-danger" asp-validation-for="GradeDetalhe.Descricao"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-2 col-12 col-sm-2">
+            <label class="form-label mb-1" asp-for="Tamanho"></label>
+            <select class="form-select" asp-for="Tamanho">
+                <option value="0">Escolha Tamanho</option>
+                @foreach (var item in Model.ListaTamanho)
+                {
+                    <option value=@item.Id>@item.Descricao</option>
+                }
+            </select>
+            <span class="text-danger" asp-validation-for="Tamanho"></span>
+        </div>
+        <div class="mb-2 col-12 col-sm-3">
+            <label class="form-label mb-1" asp-for="Padrao"></label>
+            <select class="form-select" asp-for="Padrao">
+                <option value="0">Escolha Padrão</option>
+                @foreach (var item in Model.ListaPadrao)
+                {
+                    <option value=@item.Id>@item.Descricao</option>
+                }
+            </select>
+            <span class="text-danger" asp-validation-for="Padrao"></span>
+        </div>
+        <div class="mb-2 col-12 col-sm-2">
+            <label class="form-label mb-1" asp-for="Cor1"></label>
+            <select class="form-select" asp-for="Cor1">
+                <option value="0">Escolha Cor1</option>
+                @foreach (var item in Model.ListaCores)
+                {
+                    <option value=@item.Id>@item.Descricao</option>
+                }
+            </select>
+            <span class="text-danger" asp-validation-for="Cor1"></span>
+        </div>
+        <div class="mb-2 col-12 col-sm-2">
+            <label class="form-label mb-1" asp-for="Cor2"></label>
+            <select class="form-select" asp-for="Cor2">
+                <option value="0">Escolha Cor2</option>
+                @foreach (var item in Model.ListaCores)
+                {
+                    <option value=@item.Id>@item.Descricao</option>
+                }
+            </select>
+        </div>
+        <div class="mb-2 col-12 col-sm-2">
+            <label class="form-label mb-1" asp-for="Cor3"></label>
+            <select class="form-select" asp-for="Cor3">
+                <option value="0">Escolha Cor3</option>
+                @foreach (var item in Model.ListaCores)
+                {
+                    <option value=@item.Id>@item.Descricao</option>
+                }
+            </select>
+        </div>
+
+    </div>
+</div>
+
+

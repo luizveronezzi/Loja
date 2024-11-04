@@ -1,0 +1,81 @@
+﻿@model Data.Models.MovimentoModel
+
+
+<input class="hidden" asp-for="@Model.Id" />
+<div class="row">
+    <div class="mb-2 col-12 col-sm-2">
+        <label class="form-label mb-1" asp-for="@Model.Idparceiro"></label>
+        <input class="form-control form-control-sm" asp-for="@Model.Idparceiro" type="text" />
+        <span class="text-danger" asp-validation-for="@Model.Idparceiro"></span>
+    </div>
+    <div class="mb-2 col-12 col-sm-10">
+        <label class="form-label mb-1" asp-for="@Model.Nome"></label>
+        <input class="form-control form-control-sm" asp-for="@Model.Nome" />
+        <span class="text-danger" asp-validation-for="@Model.Nome"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="mb-2 col-12 col-sm-2">
+        <label class="form-label mb-1" asp-for="@Model.Nrdocumento"></label>
+        <input class="form-control form-control-sm" asp-for="@Model.Nrdocumento" type="text" />
+        <span class="text-danger" asp-validation-for="@Model.Nrdocumento"></span>
+    </div>
+    <div class="mb-2 col-12 col-sm-1">
+        <label class="form-label mb-1" asp-for="@Model.Parcela"></label>
+        <input class="form-control form-control-sm" asp-for="@Model.Parcela" type="text" />
+        <span class="text-danger" asp-validation-for="@Model.Parcela"></span>
+    </div>
+    <div class="mb-2 col-12 col-sm-9">
+        <label class="form-label mb-1" asp-for="@Model.Descricao"></label>
+        <input class="form-control form-control-sm" asp-for="@Model.Descricao" type="text" />
+        <span class="text-danger" asp-validation-for="@Model.Descricao"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="mb-2 col-12 col-sm-3">
+        <label class="form-label mb-1" asp-for="@Model.Datavenc"></label>
+        <input class="form-control form-control-sm" asp-for="@Model.Datavenc" />
+        <span class="text-danger" asp-validation-for="@Model.Datavenc"></span>
+    </div>
+    <div class="mb-2 col-12 col-sm-3">
+        <label class="form-label mb-1" asp-for="@Model.Valorparc"></label>
+        <input class="form-control form-control-sm" asp-for="@Model.Valorparc" type="text" />
+        <span class="text-danger" asp-validation-for="@Model.Valorparc"></span>
+    </div>
+    <div class="mb-4 col-12 col-sm-4 mt-4 align-self-end">
+
+        @foreach (var despr in Model.Desprecd)
+        {
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" asp-for="@Model.Desprec" type="radio" id="@despr" value="@despr">
+                <label class="form-check-label" asp-for="@Model.Desprec">@despr</label>
+            </div>
+        }
+        
+    </div>
+</div>
+<div class="row">
+    <div class="mb-2 col-12 col-sm-3">
+        <label class="form-label mb-1" asp-for="@Model.Datapagto"></label>
+        <input class="form-control form-control-sm" asp-for="@Model.Datapagto" />
+        <span class="text-danger" asp-validation-for="@Model.Datapagto"></span>
+    </div>
+    <div class="mb-2 col-12 col-sm-3">
+        <label class="form-label mb-1" asp-for="@Model.Acrescimo"></label>
+        <input class="form-control form-control-sm" asp-for="@Model.Acrescimo" type="text" />
+        <span class="text-danger" asp-validation-for="@Model.Acrescimo"></span>
+    </div>
+    <div class="mb-2 col-12 col-sm-3">
+        <label class="form-label mb-1" asp-for="@Model.Desconto"></label>
+        <input class="form-control form-control-sm" asp-for="@Model.Desconto" type="text" />
+        <span class="text-danger" asp-validation-for="@Model.Desconto"></span>
+    </div>
+    <div class="mb-2 col-12 col-sm-3">
+        <label class="form-label mb-1" asp-for="@Model.Valorpago"></label>
+        <input class="form-control form-control-sm" asp-for="@Model.Valorpago" type="text" />
+        <span class="text-danger" asp-validation-for="@Model.Valorpago"></span>
+    </div>
+</div>
+
+
+

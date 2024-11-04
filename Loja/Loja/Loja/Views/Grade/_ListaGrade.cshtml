@@ -1,0 +1,33 @@
+﻿@model List<Data.Models.GradeDetalheModel>
+
+<div class="col-12 shape">
+    <table id="tablegrade" class="table table-hover table-sm">
+        <thead class="table-light">
+            <tr>
+                <th>@Html.DisplayNameFor(m => Model.FirstOrDefault().Tamanho)</th>
+                <th>@Html.DisplayNameFor(m => Model.FirstOrDefault().Padrao)</th>
+                <th>@Html.DisplayNameFor(m => Model.FirstOrDefault().Cor1)</th>
+                <th>@Html.DisplayNameFor(m => Model.FirstOrDefault().Cor2)</th>
+                <th>@Html.DisplayNameFor(m => Model.FirstOrDefault().Cor3)</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.Tamanho</td>
+                <td>@item.Padrao</td>
+                <td>@item.Cor1</td>
+                <td>@item.Cor2</td>
+                <td>@item.Cor3</td>
+                <td>
+                    <buttom onclick="Manutencao(@item.Id,1)" data-toggle="tooltip" title="Editar"><i class="fas fa-pencil-alt fa-lg" style="color:gray;"></i></buttom>
+                    <buttom onclick="Manutencao(@item.Id,0)" data-toggle="tooltip" title="Excluir"><i class="far fa-trash-alt fa-lg" style="color:gray;"></i></buttom>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

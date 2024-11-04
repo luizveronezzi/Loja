@@ -1,0 +1,126 @@
+﻿@model Data.Models.ParceiroModel
+
+<div class="form-group">
+    <input class="hidden" asp-for="Id" />
+    <div class="row gx-3">
+        <div class="col-12 col-sm-6">
+            <div class="col-12 shape">
+                <div class="row">
+                    <div class="mb-2 col-12 col-sm-8">
+                        <label class="form-label mb-1" asp-for="Nome"></label>
+                        <input class="form-control form-control-sm upper" asp-for="Nome" autofocus placeholder="Entre Com a Razão Social" />
+                        <span class="text-danger" asp-validation-for="Nome"></span>
+                    </div>
+                    <div class="mb-2 col-12 col-sm-4">
+                        <label class="form-label mb-1" asp-for="Cnpj_cpf"></label>
+                        <input class="form-control form-control-sm" asp-for="Cnpj_cpf" placeholder="Entre Com o Cnpj ou Cpf" />
+                        <span class="text-danger" asp-validation-for="Cnpj_cpf"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-2 col-12 col-sm-4">
+                        <label class="form-label mb-1" asp-for="Celular"></label>
+                        <input class="form-control form-control-sm upper" asp-for="Celular" placeholder="Celular" onkeypress="$(this).mask('(00) 00000-0000')" />
+                    </div>
+                    <div class="mb-2 col-12 col-sm-4">
+                        <label class="form-label mb-1" asp-for="Idtipo"></label>
+                        <select class="form-select form-select-sm" asp-for="Idtipo">
+                            <option value="0">Escolha o Tipo</option>
+                            @foreach (var item in Model.ListaTipoParc)
+                            {
+                                <option value=@item.Id>@item.Descricao</option>
+                            }
+                        </select>
+                        <span class="text-danger" asp-validation-for="Idtipo"></span>
+                    </div>
+                    <div class="mb-2 col-12 col-sm-4">
+                        <label class="form-label mb-1" asp-for="Idcargo"></label>
+                        <select class="form-select form-select-sm" asp-for="Idcargo">
+                            <option value="0">Escolha o Cargo</option>
+                            @foreach (var item in Model.ListaCargo)
+                            {
+                                <option value=@item.Id>@item.Descricao</option>
+                            }
+                        </select>
+                        <span class="text-danger" asp-validation-for="Idcargo"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-2 col-10 col-sm-6">
+                        <label class="form-label mb-1" asp-for="Endereco"></label>
+                        <input class="form-control form-control-sm upper" asp-for="Endereco" placeholder="Entre Com o Endereco" />
+                    </div>
+                    <div class="mb-2 col-2 col-sm-2">
+                        <label class="form-label mb-1" asp-for="Numero"></label>
+                        <input class="form-control form-control-sm upper" asp-for="Numero" />
+                    </div>
+                    <div class="mb-2 col-12 col-sm-4">
+                        <label class="form-label mb-1" asp-for="Complemento"></label>
+                        <input class="form-control form-control-sm upper" asp-for="Complemento" placeholder="Entre Com o Complemento" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-2 col-12 col-sm-4">
+                        <label class="form-label mb-1" asp-for="Bairro"></label>
+                        <input class="form-control form-control-sm upper" asp-for="Bairro" placeholder="Entre Com o Bairro" />
+                    </div>
+                    <div class="mb-2 col-12 col-sm-4">
+                        <label class="form-label mb-1" asp-for="Cidade"></label>
+                        <input class="form-control form-control-sm upper" asp-for="Cidade" placeholder="Entre Com o Cidade" />
+                    </div>
+                    <div class="mb-2 col-6 col-sm-2">
+                        <label class="form-label mb-1" asp-for="Estado"></label>
+                        <select class="form-control form-control-sm" asp-for="Estado" asp-items="Loja.Geral.GetEstados()">
+                            <option value="">Escolha UF</option>
+                        </select>
+                    </div>
+                    <div class="mb-2 col-6 col-sm-2">
+                        <label class="form-label mb-1" asp-for="Cep"></label>
+                        <input class="form-control form-control-sm upper" asp-for="Cep" placeholder="CEP" onkeypress="$(this).mask('00.000-000')" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6">
+            <div class="col-12 shape">
+                <div class="row">
+                    <div class="mb-2 col-12 col-sm-12">
+                        <label class="form-label mb-1" asp-for="Email"></label>
+                        <div class="input-group">
+                            <span class=" input-group-text"><i class="fas fa-at" style="color: darkgray; font-size: 16px;"></i></span>
+                            <input class="form-control form-control-sm upper" asp-for="Email" placeholder="Email" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-2 col-12 col-sm-12">
+                        <label class="form-label mb-1" asp-for="Site"></label>
+                        <div class="input-group">
+                            <span class=" input-group-text"><i class="fas fa-globe" style="color: darkgray; font-size: 16px;"></i></span>
+                            <input class="form-control form-control-sm upper" asp-for="Site" placeholder="Site" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-2 col-12 col-sm-12">
+                        <label class="form-label mb-1" asp-for="Facebook"></label>
+                        <div class="input-group">
+                            <span class=" input-group-text"><i class="fab fa-facebook-f" style="color: darkgray; font-size: 16px;"></i></span>
+                            <input class="form-control form-control-sm upper" asp-for="Facebook" placeholder="Facebook" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-2 col-12 col-sm-12">
+                        <label class="form-label mb-1" asp-for="Instagram"></label>
+                        <div class="input-group">
+                            <span class=" input-group-text"><i class="fab fa-instagram" style="color: darkgray; font-size: 16px;"></i></span>
+                            <input class="form-control form-control-sm upper" asp-for="Instagram" placeholder="Instagram" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/_VerParceiro.js"></script>

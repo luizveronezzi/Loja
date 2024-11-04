@@ -1,0 +1,8 @@
+Select 
+Concat('public ',
+		Case When Data_Type = 'varchar' Then 'string' Else Data_Type End,
+		' ',
+		Concat(Upper(Mid(Column_Name,1,1)),Lower(Mid(Column_Name,2))),
+		' {get; set;}') Model	
+From Information_Schema.Columns  
+Where Table_Name= 'parceiros';

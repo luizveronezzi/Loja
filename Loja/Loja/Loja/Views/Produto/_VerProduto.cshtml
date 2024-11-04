@@ -1,0 +1,15 @@
+﻿@model Data.Models.ProdutoModel
+
+<div class="form-group shape col-12 col-sm-12">
+    <input class="hidden" asp-for="Id"/>
+    <div class="mb-2 col-12 col-sm-2">
+        <label class="form-label mb-1" asp-for="Referencia"></label>
+        <input class="form-control form-control-sm upper" asp-for="Referencia" autofocus placeholder="Entre Com a Referência"/>
+        <span class="text-danger" asp-validation-for="Referencia"></span>
+    </div>
+    <div class="mb-2 col-12 col-sm-6">
+        <label class="form-label mb-1" asp-for="Descricao"></label>
+        <input class="form-control form-control-sm upper" asp-for="Descricao"  placeholder="Entre Com a Descrição" />
+        <span class="text-danger" asp-validation-for="Descricao"></span>
+    </div>
+</div>

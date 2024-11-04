@@ -1,0 +1,32 @@
+﻿@model List<Data.Models.ParceiroModel>
+
+<div class="col-12 shape p-3">
+    <table id="tableParceiro" class="table table-hover table-sm">
+        <thead class="table-light">
+            <tr>
+                <th>@Html.DisplayNameFor(m => Model.FirstOrDefault().Nome)</th>
+                <th>@Html.DisplayNameFor(m => Model.FirstOrDefault().Celular)</th>
+                <th>@Html.DisplayNameFor(m => Model.FirstOrDefault().descrTipoParc)</th>
+                <th>@Html.DisplayNameFor(m => Model.FirstOrDefault().descrCargo)</th>
+                <th>Ação</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Celular</td>
+                <td>@item.descrTipoParc</td>
+                <td>@item.descrCargo</td>
+                <td>
+                    <buttom onclick="Manutencao(@item.Id,1)" data-toggle="tooltip" title="Editar"><i class="fas fa-pencil-alt fa-lg" style="color:gray;"></i></buttom>
+                    <buttom onclick="Manutencao(@item.Id,0)" data-toggle="tooltip" title="Excluir"><i class="far fa-trash-alt fa-lg" style="color:gray;"></i></buttom>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
