@@ -846,7 +846,10 @@
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
-          "Data.dll": {}
+          "Data.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         },
         "compile": {
           "Data.dll": {}
